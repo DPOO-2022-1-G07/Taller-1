@@ -85,11 +85,11 @@ public class Pedido {
             String contenido = "";
             ArrayList<Producto> items = itemsPedido;
     		for (Producto item : items)
-            {contenido = item.getNombre() + "........" + item.getPrecio()+"\n";
+            {contenido = item.getNombre() + ".........." + item.getPrecio()+"\n";
             }
-            contenido = contenido + "Precio neto" + "........" + getPrecioNetoPedido() + "\n";
-            contenido = contenido + "Precio IVA" + "........" + getPrecioIvaPedido() + "\n";
-            contenido = contenido + "Precio TOTAL" + "........" + getPrecioTotalPedido();
+            contenido = contenido + "Precio neto" + ".........." + getPrecioNetoPedido() + "\n";
+            contenido = contenido + "Precio IVA" + ".........." + getPrecioIvaPedido() + "\n";
+            contenido = contenido + "Precio TOTAL" + ".........." + getPrecioTotalPedido();
             File file = new File(ruta);
             // Si el archivo no existe es creado
             if (!file.exists()) {

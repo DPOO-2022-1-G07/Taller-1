@@ -50,7 +50,10 @@ public class Combo implements Producto{
 	@Override
 	public String generarTextoFactura() {
 		// TODO Auto-generated method stub
-		return null;
+		String nombre = getNombre();
+		int precio = getPrecio();
+		String textoFactura = nombre  + ".........."+ precio ;
+		return textoFactura;
 	}
 }
 
