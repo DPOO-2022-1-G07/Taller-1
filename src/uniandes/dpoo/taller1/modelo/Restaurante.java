@@ -30,13 +30,14 @@ public class Restaurante
 		this.combos = new ArrayList<>();
 		this.menuBase = new HashMap<>();
 		this.pedidos = new HashMap<>();
-		this.pedidoEnCurso = new Pedido(0, 0, null, null, null);
 
 	}
+	
+	// Operadores pedidos
 
-	public void iniciarPedido(String nombreCliente, String direccionCLiente)
+	public void iniciarPedido(String nombreCliente, String direccionCliente)
 	{
-		this.pedidoEnCurso = pedidoEnCurso;
+		this.pedidoEnCurso = new Pedido(nombreCliente, direccionCliente);
 
 	}
 
@@ -50,11 +51,26 @@ public class Restaurante
 		
 		return pedidos;
 	}
+	
+	public void cerrarYGuardarPedido()
+	{
+		pedidos.put(null, pedidoEnCurso);
+	}
 
 	
 	//Obtener menu e Ingredientes
 	
+	public ArrayList<Producto> getMenuBase()
+	{
+		ArrayList<Producto> listaMenu = new ArrayList<Producto>(menuBase.values());
+		
+		return listaMenu;
+	}
 	
+	public ArrayList<Ingrediente> getIngredientes()
+	{
+		return ingredientes;
+	}
 	
 
 	//Carga de archivos 
