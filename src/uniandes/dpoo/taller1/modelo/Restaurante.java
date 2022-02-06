@@ -30,6 +30,7 @@ public class Restaurante
 		this.combos = new ArrayList<>();
 		this.menuBase = new HashMap<>();
 		this.pedidos = new HashMap<>();
+		
 
 	}
 	
@@ -37,6 +38,7 @@ public class Restaurante
 
 	public void iniciarPedido(String nombreCliente, String direccionCliente)
 	{
+		
 		this.pedidoEnCurso = new Pedido(nombreCliente, direccionCliente);
 
 	}
@@ -46,15 +48,17 @@ public class Restaurante
 		return pedidoEnCurso;
 	}
 	
-	public Map<Integer, Pedido> getPedidos()
-	{
+	//public Map<Integer, Pedido> getPedidos()
+	//{
 		
-		return pedidos;
-	}
+	//	return pedidos;
+	//}
 	
 	public void cerrarYGuardarPedido()
 	{
-		pedidos.put(null, pedidoEnCurso);
+		pedidos.put(pedidoEnCurso.getIdPedido(), pedidoEnCurso);
+		
+		
 	}
 
 	
@@ -98,7 +102,7 @@ public class Restaurante
 		while (linea != null) // Cuando se llegue al final del archivo, linea tendrá el valor null
 		{
 			// Separar los valores que estaban en una línea
-			String[] partes = linea.split(",");
+			String[] partes = linea.split(";");
 			String nombreIngrediente = partes[0];
 			int precioIngrediente = Integer.parseInt(partes[1]);
 
@@ -123,7 +127,7 @@ public class Restaurante
 		while (linea != null) // Cuando se llegue al final del archivo, linea tendrá el valor null
 		{
 			// Separar los valores que estaban en una línea
-			String[] partes = linea.split(",");
+			String[] partes = linea.split(";");
 			String nombreProducto = partes[0];
 			int precioProducto = Integer.parseInt(partes[1]);
 
@@ -148,7 +152,7 @@ public class Restaurante
 		while (linea != null) // Cuando se llegue al final del archivo, linea tendrá el valor null
 		{
 			// Separar los valores que estaban en una línea, y agregar nombre y descuento
-			String[] partes = linea.split(",");
+			String[] partes = linea.split(";");
 			String nombreCombo = partes[0];
 			String descuentoStr = partes[1];
 			String descuentoStr2= descuentoStr.substring(0, descuentoStr.length() - 1);  

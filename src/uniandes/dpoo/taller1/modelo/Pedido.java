@@ -7,20 +7,21 @@ import java.io.FileWriter;
 
 public class Pedido {
 	
-	private int numeroPedidos;
+	private static int numeroPedidos = 0;
 	private int idPedido;
 	private String nombreCliente;
 	private String direccionCliente;
 	private ArrayList<Producto> itemsPedido;
 	
 	
-	public Pedido(int numeroPedidos, int idPedido, String nombreCliente, String direccionCliente, Producto itemsPedido)
+	public Pedido(String nombreCliente, String direccionCliente)
 	{
-		this.numeroPedidos = numeroPedidos;
-		this.idPedido = idPedido;
+
 		this.nombreCliente = nombreCliente;
 		this.direccionCliente = direccionCliente;
 		this.itemsPedido = new ArrayList<>();
+		Pedido.numeroPedidos = numeroPedidos +1;
+		this.idPedido = (numeroPedidos+1);
 	}
 	
 	public int getNumeroPedidos()
