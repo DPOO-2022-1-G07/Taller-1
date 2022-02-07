@@ -43,13 +43,13 @@ public class Combo implements Producto{
 			
 			
 		}
-		precioTotal=(int) (precioSinDescuento*(1-descuento));
+		precioTotal=(int) (precioSinDescuento*(1.00-getDescuento()));
 		return precioTotal;
 	}
 
-	@Override
+
 	public String generarTextoFactura() {
-		// TODO Auto-generated method stub
+	
 		String nombre = getNombre();
 		int precio = getPrecio();
 		String textoFactura = nombre  + ".........."+ precio ;

@@ -1,66 +1,79 @@
 package uniandes.dpoo.taller1.modelo;
 
+import java.util.ArrayList;
 
 public class ProductoAjustado implements Producto {
-	
-	private Ingrediente adicion;
-	private Ingrediente eliminar;
-	private ProductoMenu base;
-	
-	public ProductoAjustado(ProductoMenu base, Ingrediente adicion, Ingrediente eliminar)
+
+	private ArrayList<Ingrediente> adicion;
+	private ArrayList<Ingrediente> eliminar;
+	private Producto base;
+
+	public ProductoAjustado(Producto base)
 	{
 		this.base = base;
-		this.adicion = adicion;
-		this.eliminar=eliminar;		
+		this.adicion = new ArrayList<>();
+		this.eliminar = new ArrayList<>();
+
 	}
-	
-	public ProductoMenu getBase()
+
+	public Producto getBase()
 	{
 		return base;
 	}
 
-	public Ingrediente getAdicion()
+	public void agregarListaAdicion(Ingrediente ingrediente)
 	{
-		return adicion;
-	}
-	
-	public Ingrediente getEliminar()
-	{
-		return eliminar;
+		adicion.add(ingrediente);
 	}
 
-	@Override
+	public void agregarListaEliminar(Ingrediente ingrediente)
+	{
+		eliminar.add(ingrediente);
+	}
+
+
+
 	public int getPrecio() {
-		// TODO Auto-generated method stub
+
 		int precio = base.getPrecio();
-		precio += adicion.getCostoAdicional();
-		
+		for(Ingrediente ingrediente: adicion)
+		{
+			precio += ingrediente.getCostoAdicional();
+
+		}
+
 		return precio;
 	}
 
-	@Override
+
 	public String getNombre() {
-		// TODO Auto-generated method stub
+
 		String nombre = base.getNombre();
-		if (adicion.getNombre()!= null)
+		for(Ingrediente ingrediente: adicion)
 		{
-			nombre = nombre + "con" + adicion.getNombre();
+			if (ingrediente.getNombre()!= null)
+			{
+				nombre = nombre + "\n" + "   con " + ingrediente.getNombre();
+			}
 		}
-		if (eliminar.getNombre() != null)
+		for(Ingrediente ingrediente: eliminar)
 		{
-			nombre = nombre + "sin" + eliminar.getNombre();
+			if (ingrediente.getNombre() != null)
+			{
+				nombre = nombre +"\n"+ "   sin " + ingrediente.getNombre();
+			}
 		}
-		
+
 		return nombre;
 	}
 
-	@Override
+
 	public String generarTextoFactura() {
-		// TODO Auto-generated method stub
+
 		String nombre = getNombre();
 		int precio = getPrecio();
 		String textoFactura = nombre  + ".........."+ precio ;
 		return textoFactura;
 	}
-	
+
 }

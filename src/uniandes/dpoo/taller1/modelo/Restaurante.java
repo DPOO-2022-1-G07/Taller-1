@@ -67,6 +67,7 @@ public class Restaurante
 	public ArrayList<Producto> getMenuBase()
 	{
 		ArrayList<Producto> listaMenu = new ArrayList<Producto>(menuBase.values());
+		listaMenu.addAll(combos);
 		
 		return listaMenu;
 	}
@@ -79,9 +80,7 @@ public class Restaurante
 
 	//Carga de archivos 
 
-	File archivoIngredientes = new File("/data/ingredientes");
-	File archivoMenu = new File("/data/menu");
-	File archivoCombos = new File("/data/combos");
+
 
 
 	public void cargarInformacionRestaurante(File archivoIngredientes, File archivoMenu, File archivoCombos) throws FileNotFoundException, IOException
@@ -156,9 +155,10 @@ public class Restaurante
 			String nombreCombo = partes[0];
 			String descuentoStr = partes[1];
 			String descuentoStr2= descuentoStr.substring(0, descuentoStr.length() - 1);  
-			double descuentoCombo = (Integer.parseInt(descuentoStr2)/100);
+			double descuentoCombo = ((Double.parseDouble(descuentoStr2))/100.00);
 
 			Combo elCombo = new Combo(descuentoCombo, nombreCombo);
+			
 
 
 			//Agregar el Combo a la Lista de Combos
@@ -167,7 +167,7 @@ public class Restaurante
 
 			//Agregar productos a la lista de productos del combo
 
-			for (int i=2; i<= partes.length; i+=1)
+			for (int i=2; i< partes.length; i+=1)
 			{
 				String producto = partes[i];
 				Producto elProducto = menuBase.get(producto);

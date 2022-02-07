@@ -22,9 +22,9 @@ public class ProductoMenu implements Producto{
 		return precioBase;
 	}
 
-	@Override
+
 	public String generarTextoFactura() {
-		// TODO Auto-generated method stub
+	
 		String nombre = getNombre();
 		int precio = getPrecio();
 		String textoFactura = nombre  + ".........."+ precio ;
