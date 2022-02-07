@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import uniandes.dpoo.taller1.modelo.Ingrediente;
-import uniandes.dpoo.taller1.modelo.Producto;
-import uniandes.dpoo.taller1.modelo.ProductoAjustado;
-import uniandes.dpoo.taller1.modelo.Restaurante;
+import uniandes.dpoo.taller1.modeloModificacion.Ingrediente;
+import uniandes.dpoo.taller1.modeloModificacion.Producto;
+import uniandes.dpoo.taller1.modeloModificacion.ProductoAjustado;
+import uniandes.dpoo.taller1.modeloModificacion.Restaurante;
 
 
 
@@ -27,8 +27,9 @@ public class Aplicacion {
 
 
 	File archivoIngredientes = new File("./data/ingredientes.txt");
-	File archivoMenu = new File("./data/menu.txt");
+	File archivoMenu = new File("./data/menuSinBebidas.txt");
 	File archivoCombos = new File("./data/combos.txt");
+	File archivoBebidas = new File("./data/bebidas.txt");
 
 	private Restaurante restaurante;
 
@@ -86,7 +87,7 @@ public class Aplicacion {
 	private void ejecutarCargarDatos() throws FileNotFoundException, IOException
 	{
 		// TODO Auto-generated method stub
-		restaurante.cargarInformacionRestaurante(archivoIngredientes, archivoMenu, archivoCombos);
+		restaurante.cargarInformacionRestaurante(archivoIngredientes, archivoMenu, archivoCombos, archivoBebidas);
 
 	}
 

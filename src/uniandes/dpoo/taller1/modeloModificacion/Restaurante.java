@@ -20,6 +20,8 @@ public class Restaurante
 
 	private Map<String,Producto> menuBase;
 
+	private Map<String,Producto> bebidas;
+
 	private Map<Integer , Pedido> pedidos;
 
 	private Pedido pedidoEnCurso;
@@ -29,16 +31,17 @@ public class Restaurante
 		this.ingredientes = new ArrayList<>();
 		this.combos = new ArrayList<>();
 		this.menuBase = new HashMap<>();
+		this.bebidas = new HashMap<>();
 		this.pedidos = new HashMap<>();
-		
+
 
 	}
-	
+
 	// Operadores pedidos
 
 	public void iniciarPedido(String nombreCliente, String direccionCliente)
 	{
-		
+
 		this.pedidoEnCurso = new Pedido(nombreCliente, direccionCliente);
 
 	}
@@ -47,46 +50,48 @@ public class Restaurante
 	{
 		return pedidoEnCurso;
 	}
-	
+
 	//public Map<Integer, Pedido> getPedidos()
 	//{
-		
+
 	//	return pedidos;
 	//}
-	
+
 	public void cerrarYGuardarPedido()
 	{
 		pedidos.put(pedidoEnCurso.getIdPedido(), pedidoEnCurso);
-		
-		
+
+
 	}
 
-	
+
 	//Obtener menu e Ingredientes
-	
+
 	public ArrayList<Producto> getMenuBase()
 	{
 		ArrayList<Producto> listaMenu = new ArrayList<Producto>(menuBase.values());
+		listaMenu.addAll(bebidas.values());
 		listaMenu.addAll(combos);
-		
+
 		return listaMenu;
 	}
-	
+
 	public ArrayList<Ingrediente> getIngredientes()
 	{
 		return ingredientes;
 	}
-	
+
 
 	//Carga de archivos 
 
 
 
 
-	public void cargarInformacionRestaurante(File archivoIngredientes, File archivoMenu, File archivoCombos) throws FileNotFoundException, IOException
+	public void cargarInformacionRestaurante(File archivoIngredientes, File archivoMenu, File archivoCombos, File archivoBebidas) throws FileNotFoundException, IOException
 	{
 		cargarIngredientes(archivoIngredientes);
 		cargarMenu(archivoMenu);
+		cargarBebidas(archivoBebidas);
 		cargarCombo(archivoCombos);
 
 	}
@@ -142,6 +147,31 @@ public class Restaurante
 		br.close();
 	}
 
+	private void cargarBebidas(File archivoBebidas) throws FileNotFoundException, IOException
+	{
+
+		// Abrir el archivo y leerlo línea por línea usando un BufferedReader
+		BufferedReader br = new BufferedReader(new FileReader(archivoBebidas));
+		String linea = br.readLine();
+		while (linea != null) // Cuando se llegue al final del archivo, linea tendrá el valor null
+		{
+			// Separar los valores que estaban en una línea
+			String[] partes = linea.split(";");
+			String nombreProducto = partes[0];
+			int precioProducto = Integer.parseInt(partes[1]);
+
+			Bebidas elProducto = new Bebidas(nombreProducto, precioProducto);
+
+			//Agregar Producto al Mapa de Productos
+
+			bebidas.put(nombreProducto,elProducto);
+
+			linea = br.readLine(); // Leer la siguiente línea
+		}
+
+		br.close();
+	}
+
 	private void cargarCombo(File archivoCombos) throws FileNotFoundException, IOException
 	{
 
@@ -158,7 +188,7 @@ public class Restaurante
 			double descuentoCombo = ((Double.parseDouble(descuentoStr2))/100.00);
 
 			Combo elCombo = new Combo(descuentoCombo, nombreCombo);
-			
+
 
 
 			//Agregar el Combo a la Lista de Combos
@@ -171,7 +201,16 @@ public class Restaurante
 			{
 				String producto = partes[i];
 				Producto elProducto = menuBase.get(producto);
-				elCombo.agregarItemACombo(elProducto);
+				if (elProducto != (null))
+				{
+					elCombo.agregarItemACombo(elProducto);
+				}
+				else
+				{
+					Producto laBebida = bebidas.get(producto);
+					elCombo.agregarItemACombo(laBebida);
+				}
+				
 
 			}
 
